@@ -37,25 +37,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # new
 
     # 3rd party
-
-    'crispy_forms',     # from the book
-    'crispy_bootstrap4',
+    'crispy_forms',     # new
+    'crispy_bootstrap4',    # recommendation stackoverflow
+    'allauth',      # new
+    'allauth.account',      # chatgpt
 
     # local
     'users.apps.UsersConfig',    # new
-    'pages.apps.PagesConfig'    # new
+    'pages.apps.PagesConfig',    # new
 
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
 
-
 AUTH_USER_MODEL = 'users.CustomUser'    # new
-
-# django-crispy-forms
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -65,6 +63,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 3rd party
+    'allauth.account.middleware.AccountMiddleware'     # changed from 'allauth.account',  # new
+
 ]
 
 ROOT_URLCONF = 'bookstore_project.urls'
@@ -150,6 +152,30 @@ STATICFILES_FINDERS = [     # new
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# django-allauth config
 LOGIN_REDIRECT_URL = 'home' # redirects user after successful login
-LOGOUT_REDIRECT_URl = 'home' # redirects after logout
+ACCOUNT_LOGOUT_REDIRECT_URL = 'home' # redirects after logout # new, updated after allauth
 
+# bottom part
+
+# django-allauth config
+SITE_ID = 1     # new
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',    # new
+    'allauth.account.auth_backends.AuthenticationBackend',  # new
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'    # new
+
+ACCOUNT_SESSION_REMEMBER = True     # new /  this removes the remember me in login
+
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False     # new / sets to only ask input password once
+
+ACCOUNT_USERNAME_REQUIRED = False   # new
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'     # new
+
+ACCOUNT_EMAIL_REQUIRED = True       # new
+
+ACCOUNT_UNIQUE_EMAIL = True     # new

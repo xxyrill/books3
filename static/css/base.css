@@ -1,0 +1,8 @@
+h1 {
+color: red;
+}
+
+.bookcover {
+    height: 300px; /* sets the height of the image */
+    width: auto; /* Allows the width of the image to adjust automatically while maintaining its aspect ratio */
+}

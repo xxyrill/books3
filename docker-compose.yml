@@ -6,7 +6,15 @@ services:
     command: python /code/manage.py runserver 0.0.0.0:8000
     environment:
     - SECRET_KEY=django-insecure-s$$uyu-__5o)=$$it+%g8(yn5=5jq9zerh+ynz-biwi7nl7ho0$$%
+    # secret key came from settings.py, added additional $ to every $ sign
     - DEBUG=1 # means debug is true
+   # - EMAIL_BACKEND = django.core.mail.backends.smtp.EmailBackend    # new
+   # - DEFAULT_FROM_EMAIL = xyrillariel@gmail.com
+   # - EMAIL_HOST = smtp.sendgrid.net       # new
+   # - EMAIL_HOST_USER = apikey       # new
+   # - EMAIL_HOST_PASSWORD = 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       # new
+   # - EMAIL_PORT = 465       # new
+   # - EMAIL_USE_SSL = True
     volumes:
       - .:/code
     ports:
@@ -19,6 +27,11 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+
+ # smtp:
+ #   image: namshi/smtp
+ #   ports:
+  #    - "1025:1025"
 
 volumes:
   postgres_data:

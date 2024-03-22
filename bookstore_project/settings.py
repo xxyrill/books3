@@ -193,3 +193,6 @@ EMAIL_PORT = 587       # new
 # EMAIL_USE_SSL = True
 EMAIL_USE_TLS = True       # new
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+

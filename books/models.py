@@ -14,6 +14,18 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     cover = models.ImageField(upload_to='covers/', blank=True)  # users media
     # to upload all types of file, change to FileField
+
+    class Meta:
+        permissions = [
+            ('special_status', 'Can read all books'),
+        ]
+
+    def __str__(self):
+            return self.title
+
+    def get_absolute_url(self):
+            return reverse('book_detail', args=[str(self.id)])
+
     def __str__(self):
         return self.title
 
@@ -34,4 +46,6 @@ class Review(models.Model):
     )
     def __str__(self):
         return self.review
+
+
 

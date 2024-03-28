@@ -171,7 +171,6 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',  # new
 )
 
-
 ACCOUNT_SESSION_REMEMBER = True     # new /  this removes the remember me in login
 
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False     # new / sets to only ask input password once
@@ -184,14 +183,17 @@ ACCOUNT_EMAIL_REQUIRED = True       # new
 
 ACCOUNT_UNIQUE_EMAIL = True     # new
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    # new
-DEFAULT_FROM_EMAIL = 'xyrillariel@gmail.com'
-EMAIL_HOST = 'smtp.sendgrid.net'       # new
-EMAIL_HOST_USER = 'apikey'       # new
-EMAIL_HOST_PASSWORD = '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'       # new
-EMAIL_PORT = 587       # new
-# EMAIL_USE_SSL = True
-EMAIL_USE_TLS = True       # new
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'    # new
+#DEFAULT_FROM_EMAIL = 'xyrillariel@gmail.com'
+#EMAIL_HOST = 'smtp.sendgrid.net'       # new
+#EMAIL_HOST_USER = 'apikey'       # new
+#EMAIL_HOST_PASSWORD = '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'       # new
+#EMAIL_PORT = 587       # new
+#EMAIL_USE_TLS = True       # new
+
+EMAIL_SSL_CERTIFILE = None
+EMAIL_SSL_KEYFILE = None
+EMAIL_SSL_CA_FILE = None
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

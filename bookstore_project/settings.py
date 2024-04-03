@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',    # new
     'pages.apps.PagesConfig',    # new
     'books.apps.BooksConfig',    # new
-
+    'orders.apps.OrdersConfig', # new
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
@@ -197,4 +197,7 @@ EMAIL_SSL_CA_FILE = None
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STRIPE_TEST_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY') # for payment
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') # for payment
 

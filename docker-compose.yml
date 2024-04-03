@@ -8,6 +8,8 @@ services:
     - SECRET_KEY=django-insecure-s$$uyu-__5o)=$$it+%g8(yn5=5jq9zerh+ynz-biwi7nl7ho0$$%
     # secret key came from settings.py, added additional $ to every $ sign
     - DEBUG=1 # means debug is true
+    - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51OzExb08GLJzd6o3J1itIo0RlKYf8Wqg6snxSwUDeWGDEiQtqhux0P5CaJtLkgkqgQvkWZC9OmN3fwY5yCa7p7eI000DgM1WbN
+    - STRIPE_TEST_SECRET_KEY=sk_test_51OzExb08GLJzd6o3e2begHolrH6yYIemoHUNIJlhaG3Z6GXv2n9j3Rs5DXNBk8CKKKCtwTuO7NSHt6VIrt65R99h00SelKOE4r
    # - EMAIL_BACKEND = django.core.mail.backends.smtp.EmailBackend    # new
    # - DEFAULT_FROM_EMAIL = xyrillariel@gmail.com
    # - EMAIL_HOST = smtp.sendgrid.net       # new

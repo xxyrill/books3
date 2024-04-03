@@ -3,9 +3,18 @@
 {% block title %}Books{% endblock title %}
 
 {% block content %}
+
+{% if not perms.books.special_status %} <!-- if not purchase yet, the purchase button will show -->
+
+<a href="{% url 'orders' %}" class="btn btn-success"> Purchase All Books</a> <!-- button -->
+
+{% endif %}
+
 {% for book in book_list %}
+
 <div>
     <h2><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></h2> <!-- generates individual pages for the object which is the books -->
 </div>
+
 {% endfor %}
 {% endblock content %}

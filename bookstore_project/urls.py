@@ -16,3 +16,9 @@ urlpatterns = [
     path('books/', include('books.urls')), # new, has your books page, 3
     path('orders/', include('orders.urls')), # new, has your orders page, 4
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)   # users media
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

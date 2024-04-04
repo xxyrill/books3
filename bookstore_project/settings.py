@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',    # recommendation stackoverflow
     'allauth',      # new
     'allauth.account',      # chatgpt
+    'debug_toolbar',    # new, for optimization. This will create a debug toolbar
 
     # local
     'users.apps.UsersConfig',    # new
@@ -61,6 +62,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4' # new
 AUTH_USER_MODEL = 'users.CustomUser'    # new
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware', # new, for per site caching, the simplest caching approach
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,11 +70,16 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware', # new, for optimization. This will create a debug toolbar
 
     # 3rd party
-    'allauth.account.middleware.AccountMiddleware'     # changed from 'allauth.account',  # new
-
+    'allauth.account.middleware.AccountMiddleware',    # changed from 'allauth.account',  # new
+    'django.middleware.cache.FetchFromCacheMiddleware', # new, for per site caching, the simplest caching approach
 ]
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
 
 ROOT_URLCONF = 'bookstore_project.urls'
 
@@ -201,3 +208,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STRIPE_TEST_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY') # for payment
 STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') # for payment
 
+import socket # new, for optimization. Added after the debug toolbar was added at the top
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]

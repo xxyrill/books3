@@ -6,7 +6,7 @@ from django.urls import reverse # new
 class Book(models.Model):
     id = models.UUIDField (
         primary_key=True,
-        default=uuid.uuid4,
+        default=uuid.uuid4,     # for creating a unique id in every book
         editable=False
     )
     title = models.CharField(max_length=200)
@@ -46,6 +46,14 @@ class Review(models.Model):
     )
     def __str__(self):
         return self.review
+
+    class Meta:     # for indexing, allows faster searches and only applied to primary key
+        indexes = [
+            models.Index(fields=['id'], name='id_index'),
+        ]
+        permissions = [
+            ("special_status", "Can read all books"),
+        ]
 
 
 

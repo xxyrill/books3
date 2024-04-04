@@ -12,6 +12,7 @@ django-allauth = "*"
 pillow = "*"
 certifi = "*"
 stripe = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

@@ -10,13 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
-#from django.core.management.utils import get_random_secret_key
+# from django.core.management.utils import get_random_secret_key
 
 from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+ENVIRONMENT = os.environ.get('ENVIRONMENT', default='development') # added to make code production ready
 
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -211,3 +213,14 @@ STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY') # for payment
 import socket # new, for optimization. Added after the debug toolbar was added at the top
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
+
+if ENVIRONMENT == 'production':
+    SECURE_BROWSER_XSS_FILTER = True        # XSS attack prevention
+    X_FRAME_OPTIONS = 'DENY'                # Clickjacking prevention
+    SECURE_SSL_REDIRECT = True              # for HTTPS/SSL
+    SECURE_HSTS_SECONDS = 3600              # for HTTP Strict Transport Security (HSTS)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True   # for HTTP Strict Transport Security (HSTS)
+    SECURE_HSTS_PRELOAD = True              # for HTTP Strict Transport Security (HSTS)
+    SECURE_CONTENT_TYPE_NOSNIFF = True      # for HTTP Strict Transport Security (HSTS)
+    CSRF_COOKIE_SECURE = True               # for Secure Cookies
+    SESSION_COOKIE_SECURE = True            # for Secure Cookies / not in book, suggested by powershell

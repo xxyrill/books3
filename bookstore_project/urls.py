@@ -5,7 +5,7 @@ from django.urls import path, include # new
 
 urlpatterns = [
     # django admin
-    path('admin/', admin.site.urls),
+    path('anything-but-admin/', admin.site.urls),   # updated to anything-but-admin for admin hardening, see book
 
     # user management
     path('accounts/', include('allauth.urls')),     # new

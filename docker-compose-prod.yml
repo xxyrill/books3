@@ -1,0 +1,23 @@
+# the same as docker-compose.yml but without the volume
+# and updated to ENVIRONMENT=production
+
+version: '3.12.2'
+
+services:
+  web:
+    build: .
+    command: python /code/manage.py runserver 0.0.0.0:8000
+    environment:
+    - ENVIRONMENT=production
+    - SECRET_KEY=3#7ar=3d_uq*4u%8u#0j)1@la&+tj+(pw%mqz6u*28bgdqk^=#
+    - DEBUG=0 # means debug is false for production
+    - STRIPE_TEST_PUBLISHABLE_KEY=pk_test_51OzExb08GLJzd6o3J1itIo0RlKYf8Wqg6snxSwUDeWGDEiQtqhux0P5CaJtLkgkqgQvkWZC9OmN3fwY5yCa7p7eI000DgM1WbN
+    - STRIPE_TEST_SECRET_KEY=sk_test_51OzExb08GLJzd6o3e2begHolrH6yYIemoHUNIJlhaG3Z6GXv2n9j3Rs5DXNBk8CKKKCtwTuO7NSHt6VIrt65R99h00SelKOE4r
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres

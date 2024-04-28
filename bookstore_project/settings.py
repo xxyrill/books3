@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',    # for deployment, use to serve static files
     'django.contrib.staticfiles',
     'django.contrib.sites', # new
 
@@ -66,6 +67,7 @@ AUTH_USER_MODEL = 'users.CustomUser'    # new
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware', # new, for per site caching, the simplest caching approach
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # for deployment,  use to serve static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -224,3 +226,10 @@ if ENVIRONMENT == 'production':
     SECURE_CONTENT_TYPE_NOSNIFF = True      # for HTTP Strict Transport Security (HSTS)
     CSRF_COOKIE_SECURE = True               # for Secure Cookies
     SESSION_COOKIE_SECURE = True            # for Secure Cookies / not in book, suggested by powershell
+
+
+
+    # heroku
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].updated(db_from_env)

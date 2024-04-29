@@ -225,7 +225,7 @@ if ENVIRONMENT == 'production':
     SECURE_HSTS_PRELOAD = True              # for HTTP Strict Transport Security (HSTS)
     SECURE_CONTENT_TYPE_NOSNIFF = True      # for HTTP Strict Transport Security (HSTS)
     CSRF_COOKIE_SECURE = True               # for Secure Cookies
-    SESSION_COOKIE_SECURE = True            # for Secure Cookies / not in book, suggested by powershell
+    SESSION_COOKIE_SECURE = True            # for Secure Cookies 
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # for heroku
 
 

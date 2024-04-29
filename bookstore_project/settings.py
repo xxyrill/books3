@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = ['pure-ridge-73757.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['pacific-brushlands-84298.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -225,7 +225,7 @@ if ENVIRONMENT == 'production':
     SECURE_HSTS_PRELOAD = True              # for HTTP Strict Transport Security (HSTS)
     SECURE_CONTENT_TYPE_NOSNIFF = True      # for HTTP Strict Transport Security (HSTS)
     CSRF_COOKIE_SECURE = True               # for Secure Cookies
-    SESSION_COOKIE_SECURE = True            # for Secure Cookies 
+    SESSION_COOKIE_SECURE = True            # for Secure Cookies
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')   # for heroku
 
 
